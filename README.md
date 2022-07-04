@@ -11,7 +11,10 @@ Easy Peesy
 
 Setup App
 
-````
+# Setup GCP Database
+
+strapi-supabase
+my-project-80760:australia-southeast1:strapi-supabase
 
 ```bash
 # <instance_id>:<region>:<instance_name>
@@ -24,6 +27,16 @@ touch app.yaml
 touch .gcloudignore
 # configure app engine
 gcloud app deploy app.yaml --project my-project-80760
+# watch logs
+gcloud app logs tail --project=my-project-80760 -s default
 
+# open project
+gcloud app browse
 
-````
+```
+
+https://my-project-80760.ts.r.appspot.com/admin
+
+# Setup GCP Storage
+
+- https://github.com/strapi-community/strapi-provider-upload-google-cloud-storage
