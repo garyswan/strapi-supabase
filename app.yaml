@@ -1,0 +1,14 @@
+# Google App Engine Settings
+runtime: nodejs16
+
+instance_class: F2
+
+env_variables:
+  HOST: "db.whkacgsmmzgbsyrsjmxh.supabase.co"
+  NODE_ENV: "production"
+  DATABASE_NAME: "postgres"
+  DATABASE_USER: "postgres"
+  DATABASE_PASSWORD: "sEhnybZtq3bnjm@"
+  INSTANCE_CONNECTION_NAME: "my-project-80760:australia-southeast1:strapi-supabase"
+beta_settings:
+  cloud_sql_instances: "my-project-80760:australia-southeast1:strapi-supabase"
