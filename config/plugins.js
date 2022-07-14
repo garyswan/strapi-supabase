@@ -1,29 +1,31 @@
-module.exports = {
+module.exports = ({ env }) => ({
   upload: {
     config: {
       provider: "@strapi-community/strapi-provider-upload-google-cloud-storage",
       providerOptions: {
-        bucketName: "strapi-supabase",
-        publicFiles: true,
-        uniform: false,
-        serviceAccount: {
-          type: "service_account",
-          project: "my-project-80760",
-          project_id: "my-project-80760",
-          private_key_id: "8da358012c9489ff4d6b59ed3fec7a5dad2c9635",
-          private_key:
-            "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCXcn9cgwHJANXx\ntLVbioOrf1+7r3M43aBXg8zVK+9SnAATuIEvR1Y3Wl7msc2DDZUP7pi4hfsB91Zr\ntwOeZ44W6JDLgVMaWvXZjEjQLARskshARnvNY+cKoyJChfegaEOndtNfhAzDHqZH\nkIM/RbveVGj0g6y7JuPcS/tQMrDpJ9ZwWVEVl/Ga4kGJMp9WeexOddFU/oE6ep/V\nFgch423GJuEDCtlyw7gbIxY5PEtkXm5x0hDQ8JWEGBGeq4hy9jylys5tDBd3AfAW\nZmbzTtsrBk0o70I16ZKxxVM2aHzhaK0MKlh9mNymUGvX0e+TK/oVLmgyGhxMf3KC\nNdN9NhoBAgMBAAECggEADIjv3QgELs8rO2KPRttebeRmAmfRgURpZV+a+uM0X2xa\ns/HSfMefwtxvpxJ9BbrVup2EoHPebwQ6GpeUQhkkxo/15BIj1GDw9lJJIzRxd/cS\nLK0TdCWFAE64+DPpvKoZ52jLXUgrB5SoLfDacXM5IHwbZRmSQ2SYTtSEdtfV6AZB\nHCTNjO/lMyonKepZsbFNbm1VQYeUwC6yO4rx8ySCSM6F13KpQYWUjqfAie9XXEU8\nD03yahLEWw9mdzpUX8NbIOPcbqX3r9fPIRv/yfGK38cRWimc/V+zGIECl07yP+ap\n/ugMCEvAYEU5hY87v94qbl1FjQj4/HglwSMhl4TzXQKBgQDQFMb/Bgl8msLtFhRF\nAXGEHEP9NdxZGCokcJvTULgglDm7OI/Bd9wxUvPBnDuf2sNcowxdvd0k4jiihwmI\n8f7kkplA2oMCnhxHAKgocN6jt0Mofbh3rjdXe2owWFauDlJfmQfxKcoY9TGcv4RS\nEHD7QrOiCnkk76xdE7/gG0n+uwKBgQC6Uuxd5zcj6sYRsoYnC5EHqgR5QzKpZVde\nW0ARE915FkN7v+q9KzVEqrB2Pxc7H0uL7Bh6A97kWKNYkQb/c8OvyFvjIM8KKKIA\nEZV9C5YbWzE6CYLAclz1r1OsyXOZvNjD9dSREBPjhA1vdQVcfL2fy03lVgcoWHnw\nIltUdn1EcwKBgARgC3cdR2HJV0Po7PAugZaHiZ5vXXy6F1jAzWX6EoUM2NHo9Iza\n2lRnLBzsDgzkaqst+nqWHWpDH3G7aSXqALQJqRNGBO8vJ+UOTHrdNLE4jz7wtco+\nbYd3Xto5YUkzn+PGsfYOLOOtdCeZl0yqb9W4p1JG6hkuuO8UFTq/GCU1AoGBAJxA\nFAX/cydEp8uJiaTOt1XVByFl7+NMoAL5xPVNUmpL+FWbsM/onygxeAABkoq7CNCT\nMkeIXW/iwUDxhgvNWepcvGnxRo6/WnNyS4lsoPnZ9KM1/JdEkJ5b5HC/E5l2W9Wh\nnxvzfqpKQDYazV8tIJwTkwRiq2fzInb1aN+g6hXvAoGAXJ1hOPgIFdEEHSXKOGOT\niVpW7WP+VkiPu2SbrmfVUMOf4pBjZ++BmLZPsp8zjJXHNmMDiBdZ9EQ7f7bNHRdE\nNnfJIGLnnctKUZO+mTTeryGbLXGPUsMIzyxRsoI9vIUWimQ2gQSJnn1miANhvSRn\nBFEGiRkbMkyw6C9CKBH/Gac=\n-----END PRIVATE KEY-----\n",
-          client_email:
-            "strapi-supabase@my-project-80760.iam.gserviceaccount.com",
-          client_id: "111204814145655897464",
-          auth_uri: "https://accounts.google.com/o/oauth2/auth",
-          token_uri: "https://oauth2.googleapis.com/token",
-          auth_provider_x509_cert_url:
-            "https://www.googleapis.com/oauth2/v1/certs",
-          client_x509_cert_url:
-            "https://www.googleapis.com/robot/v1/metadata/x509/strapi-supabase%40my-project-80760.iam.gserviceaccount.com",
-        },
+        bucketName: env("GCS_BUCKET_NAME"),
+        publicFiles: env("GCS_PUBLIC_FILES"),
+        uniform: env("GCS_UNIFORM"),
+        baseUrl: env("GCS_BASE_URL"),
+        basePath: env("GCS_BASE_PATH"),
+        serviceAccount: env.json("GCS_SERVICE_ACCOUNT"),
+        // serviceAccount: {
+        //   type: "service_account",
+        //   project_id: "my-project-80760",
+        //   private_key_id: "c140cf72c224bab7969bd101676447c93462ae78",
+        //   private_key:
+        //     "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCdAT40NBjPX1ON\nsNpPnjG5NdBwIo9V8ydDZgAdhNYhyqPXM4XLyIgeOI3/371ef+BRek+210ySZT0J\nSojmmQzvpYt3yTy64mzFr7dYwPKuCecsEyHI1QqT7ADiUkNOhb+RFTu0aUx6DCH+\nMkHG6j7xQyOWORr5BRm3yafDi9bv4g/l8w1R11QxF98Nws1XDK59wTUUJrnLp6RR\nTVpxWVzR4mLFpTJ+Pd/1WJllFvq7oy04R4vhoByfbDKvUcZUiBvHrzbUHXWau3es\ntV9yTbamBe/Z/7IoTOyBssafWcn/UcNWJnaM5zYHjRCowZAW3JECZ5rE9QtNJkYz\n1/oYYciNAgMBAAECggEAEIcX+EDft7zOO+U5JhZ+H4QlvBg3RJIDORocuv7H1+jQ\nFJBs7kXe5meHsz7nXXJSt+ELUTEa83JK2ZaKENRdw0CHDQYXKYk6cBkOUP6GzYFn\nX4FoFg8vPOEkOq70POjhgLFehqBrF5H9Zhf+SqVQGO+7aE38o+hAi9NjoLcw2jGk\nooYFeFlTsdmbAYIDkMi/4NChA+uGt3hMUp1LfLuYWU3l7LAnlIgjVyFrldrQIQdt\noAr8QdPGXvdspRW6iyk3NlcPzxb6xH2w/BxarvDrySQJ6lhurwPQZmuoOOxIIrk8\nKqfM6Nko8r0z5VLCRlyOlsW11DiQJTiNd9CCvFrstQKBgQDaoJ+daPGx+444jQC9\nS+DiOJ3b3/foUkS0uRMQQ4x7GVb4Rs/97LPkYencaT9SvKVsWCuqD0Y2JgdvXrRI\ntyfrtw2xVLSxuvxlcICLbLy2fMCxQfutyTyk80b7pbKs+ZEbE/MwxloPl/hwrcr4\nqiCXAM22hqwEeIRk2HdY3TVBFwKBgQC31/KgLAfhsT2ftUzzZ5euFM5hT1MySTik\nTuG2RSMwbZ3i/yUynQ10+r8yRKsXbwh9eNFlx8/IBOLBStALQW8XQcmN4NKP3rC6\n957QHVRXUqavWOJSr/AhLd3yXHMWYVGGwVRZ04lC8Anu4xRKuHA+TsWxQtW44I4K\nKSw27NEh+wKBgQDaN5TZwxPruNCd9W+VghU295fpDUYe526YjFpQ03t2qzY5nkSg\niRCNloWccJi59n2PBPqgRZqpFZA6Q2bjZZ09E3thUtEAzUh7360OfTxnUWHsC5Yw\nQjp70i85oowTRw7k3ibQukrOYbuijHWZegYJcs3hr84msDxFhCKr2i/7hQKBgFzT\nkfOkJ9qihs4UWiVwwhqo8MgbqJN0e0AjgD5rTGhQgO80C1EyEbBmR5IXMBhl/PB1\nx61Ppa+GIASfRMraIECq/B1CTq9MLwpIq4zDsmlhFz7kb2p24ZWvNikA2y+KtgKH\nrZKph94fm7RePkm4NRyQ46ssZwOxhqbEwUl+a95vAoGALLjfeQ80oKIZOKuyL5yR\nqRwjG9+gZAwMgV9yCZoGaq6+3MeYDV8PJAY80RISo0LK7xDObEawaD9ShPC8fKYP\nvM3NnB7QIQYakFWaalTMRhx2PNCadWCdX5v/pl7f8awEKPlO33oKz/gd436WJ3WA\nTGhH7HSlbWXyqFWTK1elrqo=\n-----END PRIVATE KEY-----\n",
+        //   client_email:
+        //     "strapi-supabase@my-project-80760.iam.gserviceaccount.com",
+        //   client_id: "111204814145655897464",
+        //   auth_uri: "https://accounts.google.com/o/oauth2/auth",
+        //   token_uri: "https://oauth2.googleapis.com/token",
+        //   auth_provider_x509_cert_url:
+        //     "https://www.googleapis.com/oauth2/v1/certs",
+        //   client_x509_cert_url:
+        //     "https://www.googleapis.com/robot/v1/metadata/x509/strapi-supabase%40my-project-80760.iam.gserviceaccount.com",
+        // },
       },
     },
   },
-};
+});

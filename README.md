@@ -11,7 +11,7 @@ Easy Peesy
 
 Setup App
 
-# Setup GCP Database
+# Setup GCP App
 
 strapi-supabase
 my-project-80760:australia-southeast1:strapi-supabase
